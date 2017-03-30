@@ -1,0 +1,37 @@
+vector想当二维数组使用，一定要给数组先分配空间。
+例子：leetcode--118
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> array(numRows);
+    
+        if(numRows >= 1)
+        {
+         //array[0].resize(1);   //给第一行开辟一个数的内存空间，此操作必须做，如果不使用push_back。
+         array[0].push_back(1);
+         //array[0][1]=1;
+        }
+        if(numRows >= 2)
+        {
+       array[1].push_back(1);
+       array[1].push_back(1);
+        }
+        if(numRows>=3)
+        {
+        for(int i=2;i<numRows;i++)
+        {   array[i].resize(i+1);
+            array[i][0]=1;
+            array[i][i]=1;
+            for(int j=1;j<i;j++)
+            {
+                
+                array[i][j]=array[i-1][j-1]+array[i-1][j];
+            }
+        }
+        }
+        
+
+        return array;
+        
+    }
+};
